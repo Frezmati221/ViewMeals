@@ -1,0 +1,35 @@
+# Logs
+/admin/logs
+/admin/*.log
+/admin/npm-debug.log*
+/admin/yarn-debug.log*
+/admin/yarn-error.log*
+/admin/pnpm-debug.log*
+/admin/lerna-debug.log*
+
+/admin/server/node_modules
+/admin/server/package-lock.json
+/admin/server/dist
+/admin/client/node_modules
+/admin/client/package-lock.json
+/admin/client/dist
+/admin/client/dist-ssr
+/admin/client/*.local
+
+/node_modules
+/package-lock.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+/dist
+.env
