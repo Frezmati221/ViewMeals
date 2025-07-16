@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { InjectModel } from "@nestjs/mongoose";
@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
       .select("-password -stripe");
 
     if (!user) {
-      return null;
+      throw new UnauthorizedException("Invalid token");
     }
 
     return user;

@@ -1,13 +1,25 @@
-import { Controller, Post, Body, ValidationPipe } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import {
+  Controller,
+  Post,
+  Body,
+  ValidationPipe,
+  UseGuards,
+} from "@nestjs/common";
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from "@nestjs/swagger";
 import {
   RegisterDto,
   LoginDto,
   ForgotPasswordDto,
   ResetPasswordDto,
 } from "./dto/auth.dto";
-import { Roles, UserRoleEnum } from "@viewmeals-server/common";
+import { Roles, UserRoleEnum, RolesGuard } from "@viewmeals-server/common";
 import { AuthService } from "./auth.service";
+import { AuthGuard } from "@nestjs/passport";
 
 @ApiTags("Authentication")
 @Controller({
@@ -19,6 +31,8 @@ export class AuthController {
 
   @Post("register-restaurant-admin")
   @Roles(UserRoleEnum.SuperAdmin)
+  @UseGuards(AuthGuard("jwt"))
+  @ApiBearerAuth()
   @ApiOperation({ summary: "Register restaurant admin" })
   @ApiResponse({ status: 201, description: "User registered successfully" })
   async registerRestaurantAdmin(
